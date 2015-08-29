@@ -1,6 +1,6 @@
 ###LockResizeGadget
 
-Un outil developpé avec **PureBasic** pour redimentionner automatiquement les éléments d'un formulaire.
+Un outil developpé avec **PureBasic** pour redimensionner automatiquement les éléments d'un formulaire.
 
 A tool developed with **PureBasic** to automatically resize the elements of a form.
 
