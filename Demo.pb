@@ -1,6 +1,6 @@
-EnableExplicit
+;EnableExplicit
 
-IncludeFile "LockResizeGadget.pbi"
+IncludeFile "LockResize.pbi"
 
 Enumeration
   #Mainform
@@ -53,3 +53,8 @@ UseLockGadget()
 Open_MainForm()
 
 Repeat : Until WaitWindowEvent(10) = #PB_Event_CloseWindow
+
+; IDE Options = PureBasic 5.42 LTS (Windows - x86)
+; Folding = -
+; EnableUnicode
+; EnableXP
