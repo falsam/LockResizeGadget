@@ -1,8 +1,7 @@
 ;LockResizeGadget.pbi Version 1.30
 ;
-;Version lib
 ;Create : 07 Aout 2012
-;Update : 18 Janvier 2015
+;Update : 13 Octobre 2013
 ;
 ;OS : Window, Linux (En principe), OSx (En principe)
 ;PB 4.51, --> 5.31
@@ -17,7 +16,7 @@
 
 ;
 ; Initialisation
-ProcedureDLL UseLockGadget()
+Procedure UseLockGadget()
   Structure Gadget
     Window.i      
   
@@ -44,9 +43,9 @@ ProcedureDLL UseLockGadget()
 EndProcedure
 
 ; 
-;Fixe (#True) ou pas (#False) les bords d'un gadget sur une fenÃªtre.
+;Fixe (#True) ou pas (#False) les bords d'un gadget sur une fenêtre.
 ;Centre (#True) ou pas (#False) un gadget horizontalement et/ou verticalement.
-Procedure LockGadget_All(Window, Gadget, LockLeft, LockTop, LockRight, LockBottom, HorizontalCenter, VerticalCenter)
+Procedure LockGadget(Window.i, Gadget.i, LockLeft.b, LockTop.b, LockRight.b, LockBottom.b, HorizontalCenter.b = #False, VerticalCenter.b = #False)
 
   AddElement(LockGadgets())
   
@@ -70,23 +69,9 @@ Procedure LockGadget_All(Window, Gadget, LockLeft, LockTop, LockRight, LockBotto
     \Width = GadgetWidth(Gadget)
     \Height = GadgetHeight(Gadget)
   EndWith
-  ProcedureReturn #True
+
 EndProcedure
 
-ProcedureDLL LockGadget(Window, Gadget, LockLeft, LockTop, LockRight, LockBottom)
-  HorizontalCenter = #False
-  VerticalCenter   = #False
-  
-  ProcedureReturn LockGadget_All(Window, Gadget, LockLeft, LockTop, LockRight, LockBottom, HorizontalCenter, VerticalCenter)
-EndProcedure
-
-ProcedureDLL LockGadget2(Window, Gadget, LockLeft, LockTop, LockRight, LockBottom, HorizontalCenter)  
-  ProcedureReturn LockGadget_All(Window, Gadget, LockLeft, LockTop, LockRight, LockBottom, HorizontalCenter, VerticalCenter)
-EndProcedure
-
-ProcedureDLL LockGadget3(Window, Gadget, LockLeft, LockTop, LockRight, LockBottom, HorizontalCenter, VerticalCenter)  
-  ProcedureReturn LockGadget_All(Window, Gadget, LockLeft, LockTop, LockRight, LockBottom, HorizontalCenter, VerticalCenter)
-EndProcedure
 
 ;
 ; Unlock un ou tous(Gadget.l=#True) les gadget d'une fenetre
@@ -102,7 +87,7 @@ EndProcedure
 
 
 ;
-; Redimensionne les gadgets mÃ©morisÃ©s dans la liste.
+; Redimensionne les gadgets mémorisés dans la liste.
 ProcedureDLL ResizeGadgets(Window.i)
   Protected Gadget.i, X.i, Y.i, W.i, H.i
       
@@ -159,7 +144,11 @@ ProcedureDLL ResizeGadgets(Window.i)
 EndProcedure
 
 ; 
-; DÃ©truit la Liste et libÃ¨re toutes les ressources associÃ©es
-ProcedureDLL FreeLockGadget()
+; Détruit la Liste et libère toutes les ressources associées
+Procedure FreeLockGadget()
   ResetList(LockGadgets())  
 EndProcedure
+; IDE Options = PureBasic 5.42 LTS (Windows - x86)
+; Folding = ---
+; EnableUnicode
+; EnableXP
