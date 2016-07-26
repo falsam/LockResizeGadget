@@ -4,4 +4,4 @@ Un outil developpé avec le langage **PureBasic** pour redimensionner automatiqu
 
 A tool developed with **PureBasic** to automatically resize the elements of a form.
 
-[Forum (Fr)](http://www.purebasic.fr/french/viewtopic.php?f=6&t=13161&hilit=lockresize)
+[Forum (Fr)](http://www.purebasic.fr/french/viewtopic.php?f=6&t=13161)
