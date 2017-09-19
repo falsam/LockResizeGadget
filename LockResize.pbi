@@ -1,10 +1,11 @@
-;LockResizeGadget.pbi Version 1.30
+;LockResizeGadget.pbi Version 2.00
 ;
 ;Create : 07 Aout 2012
-;Update : 13 Octobre 2013
+;Update : 19 Septembre 2017
 ;
+
 ;OS : Window, Linux (En principe), OSx (En principe)
-;PB 4.51, --> 5.31
+;PB 4.51, --> 5.61
 ;
 ;
 ;Contributors
@@ -13,10 +14,11 @@
 ; Licence : Use As You Like
 ;
 
+Declare __ResizeWindow()
 
 ;
 ; Initialisation
-Procedure UseLockGadget()
+Procedure UseLockGadget()    
   Structure Gadget
     Window.i      
   
@@ -38,7 +40,8 @@ Procedure UseLockGadget()
     HorizontalCenter.b
     VerticalCenter.b
   EndStructure      
-
+  
+  Global NewMap  Windows()
   Global NewList LockGadgets.Gadget()
 EndProcedure
 
@@ -46,7 +49,8 @@ EndProcedure
 ;Fixe (#True) ou pas (#False) les bords d'un gadget sur une fenêtre.
 ;Centre (#True) ou pas (#False) un gadget horizontalement et/ou verticalement.
 Procedure LockGadget(Window.i, Gadget.i, LockLeft.b, LockTop.b, LockRight.b, LockBottom.b, HorizontalCenter.b = #False, VerticalCenter.b = #False)
-
+  BindEvent(#PB_Event_SizeWindow, @__ResizeWindow())
+  
   AddElement(LockGadgets())
   
   With LockGadgets()
@@ -75,7 +79,7 @@ EndProcedure
 
 ;
 ; Unlock un ou tous(Gadget.l=#True) les gadget d'une fenetre
-ProcedureDLL UnLockGadget(Window.l, Gadget.l=#True)
+Procedure UnlockGadget(Window.l, Gadget.l=#True)
   ForEach LockGadgets()
     If LockGadgets()\Window = Window
       If LockGadgets()\Gadget = Gadget Or Gadget=#True
@@ -85,16 +89,13 @@ ProcedureDLL UnLockGadget(Window.l, Gadget.l=#True)
   Next
 EndProcedure
 
-
 ;
 ; Redimensionne les gadgets mémorisés dans la liste.
-ProcedureDLL ResizeGadgets(Window.i)
+Procedure __ResizeGadgets(Window.i)
   Protected Gadget.i, X.i, Y.i, W.i, H.i
       
     ForEach LockGadgets()
-      
-      If LockGadgets()\Window = Window
-        
+      If LockGadgets()\Window = Window      
         With LockGadgets()
           
           Gadget = \Gadget
@@ -137,10 +138,12 @@ ProcedureDLL ResizeGadgets(Window.i)
                     
           ResizeGadget(Gadget, X, Y, W, H)
         EndWith
-        
       EndIf
     Next
-    
+EndProcedure
+
+Procedure __ResizeWindow()
+  __ResizeGadgets(EventWindow())
 EndProcedure
 
 ; 
@@ -148,7 +151,7 @@ EndProcedure
 Procedure FreeLockGadget()
   ResetList(LockGadgets())  
 EndProcedure
-; IDE Options = PureBasic 5.42 LTS (Windows - x86)
+; IDE Options = PureBasic 5.60 (Windows - x86)
 ; Folding = ---
-; EnableUnicode
 ; EnableXP
+; EnableUnicode
