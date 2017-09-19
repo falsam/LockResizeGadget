@@ -1,6 +1,6 @@
-;EnableExplicit
+﻿;EnableExplicit
 
-IncludeFile "LockResize.pbi"
+IncludeFile "LockResize.pb"
 
 Enumeration
   #Mainform
@@ -16,11 +16,6 @@ EndEnumeration
 Define.l Event, WEvent, MEvent, GEvent, TEvent
 
 Global WindowStyle.i=#PB_Window_MinimizeGadget|#PB_Window_MaximizeGadget|#PB_Window_ScreenCentered|#PB_Window_SizeGadget
-
-Procedure OnResize()
-  ResizeGadgets(#Mainform) 
-EndProcedure
-
 
 Procedure Open_MainForm()
   OpenWindow(#Mainform, 0, 0, 500, 400, "Demo LockResizeGadget", WindowStyle)
@@ -44,17 +39,14 @@ Procedure Open_MainForm()
   LockGadget(#Mainform, #Test4, #True, #False, #True, #True)
   LockGadget(#Mainform, #Test5, #False, #True, #True, #False)
   
-  LockGadget(#Mainform, #Test6, #False, #False, #False, #True, #True)
-  
-  BindEvent(#PB_Event_SizeWindow, @OnResize())
+  LockGadget(#Mainform, #Test6, #False, #False, #False, #True, #True)  
 EndProcedure
 
 UseLockGadget()
 Open_MainForm()
 
 Repeat : Until WaitWindowEvent(10) = #PB_Event_CloseWindow
-
-; IDE Options = PureBasic 5.42 LTS (Windows - x86)
+; IDE Options = PureBasic 5.60 (Windows - x86)
+; CursorPosition = 18
 ; Folding = -
-; EnableUnicode
 ; EnableXP
